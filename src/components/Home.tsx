@@ -1,20 +1,18 @@
 
 import React from 'react';
-import { Login } from './Login';
-import firebase from '../firebase';
-import { Dictionnaries } from './Dictionnaries';
+import { Login } from './Login/Login';
+import { Dictionaries } from './Dictionaries/Dictionaries';
+import { User } from '../models/user';
 
 type HomeProps = {
-    user: firebase.User | undefined;
+  user: User | undefined;
 };
 
 export function Home(props: HomeProps) {
-    return (
-        <div className="App">
-            {!props.user && <Login />}
-            {props.user && <div>
-                <Dictionnaries user={props.user} />
-            </div>}
-        </div>
-    );
+  return (
+    <div className="App">
+      {!props.user && <Login />}
+      {props.user && <Dictionaries user={props.user} />}
+    </div>
+  );
 }

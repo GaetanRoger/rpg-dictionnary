@@ -4,14 +4,15 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from './firebase';
 import { Home } from './components/Home';
 import { FullScreenLoader } from './components/FullScreenLoader';
+import { User } from './models/user';
 
 const App: React.FC = () => {
-  const [user, initialising, error] = useAuthState(firebase.auth());
+  const [user, initializing, error] = useAuthState(firebase.auth());
 
   return (
     <div className="App">
-      {initialising && <FullScreenLoader text='App is loading...' />}
-      {!initialising && <Home user={user} />}
+      {initializing && <FullScreenLoader text='App is loading...' />}
+      {!initializing && <Home user={user && {uid: user.uid, email: user.email || ''}} />}
       {error && <p>Error while connecting to backend.</p>}
     </div>
   );
